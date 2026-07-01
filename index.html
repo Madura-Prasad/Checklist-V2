@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dark · trading checklist</title>
+  <style>
+    /* refined dark — elevated, sleek, with depth */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #070d19;
+      font-family: 'Inter', -apple-system, system-ui, 'Segoe UI', Roboto, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 1.5rem;
+      color: #e9edf5;
+    }
+
+    .card {
+      background: linear-gradient(145deg, #121b2e, #0e1627);
+      border-radius: 2rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+      padding: 2rem 2.25rem;
+      max-width: 720px;
+      width: 100%;
+      border: 1px solid #1f2d45;
+      transition: border 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      border-color: #2e405f;
+      box-shadow: 0 24px 72px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+    }
+
+    /* header — more refined */
+    header {
+      margin-bottom: 2.25rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid #1f2d45;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    header .left {
+      display: flex;
+      flex-direction: column;
+    }
+
+    header h1 {
+      font-size: 1.65rem;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      color: #f0f6ff;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    header h1 .accent {
+      font-weight: 300;
+      color: #4c6a8f;
+      font-size: 1.2rem;
+      letter-spacing: -0.05em;
+    }
+
+    header .sub {
+      font-size: 0.7rem;
+      color: #6a7f9e;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 0.1rem;
+    }
+
+    header .badge-light {
+      background: #1f2d45;
+      padding: 0.25rem 0.9rem;
+      border-radius: 40px;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: #8fa8cc;
+      border: 1px solid #2a3d59;
+      white-space: nowrap;
+    }
+
+    /* form rows */
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      margin-bottom: 1.35rem;
+    }
+
+    .field-group:last-of-type {
+      margin-bottom: 1.75rem;
+    }
+
+    label {
+      font-size: 0.55rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #7a92b4;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    label .label-icon {
+      opacity: 0.5;
+      font-size: 0.7rem;
+    }
+
+    label:after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #1a263b;
+    }
+
+    select {
+      width: 100%;
+      padding: 0.7rem 0.85rem;
+      border-radius: 1rem;
+      border: 1px solid #1f2d45;
+      background: #0b1323;
+      font-size: 0.85rem;
+      color: #e4ecfa;
+      font-weight: 430;
+      outline: none;
+      transition: border 0.2s, box-shadow 0.2s, background 0.2s, transform 0.1s;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236a7f9e' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.85rem center;
+      background-size: 0.9rem;
+    }
+
+    select:hover {
+      border-color: #345077;
+      background: #0f182d;
+      box-shadow: 0 0 0 1px rgba(76, 118, 175, 0.1);
+    }
+
+    select:focus {
+      border-color: #4c7ab0;
+      box-shadow: 0 0 0 3px rgba(76, 118, 175, 0.15);
+      background: #0f182d;
+    }
+
+    select option {
+      background: #121b2e;
+      color: #e4ecfa;
+      padding: 0.4rem;
+    }
+
+    .flex-row {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .flex-row .field-group {
+      flex: 1;
+      min-width: 150px;
+    }
+
+    /* summary — elevated glass effect */
+    .summary {
+      background: rgba(11, 19, 35, 0.7);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 1.25rem;
+      padding: 1.5rem 1.75rem;
+      font-size: 0.82rem;
+      line-height: 1.9;
+      white-space: pre-line;
+      color: #d0def5;
+      border: 1px solid #1f2d45;
+      transition: border 0.2s, background 0.2s;
+      font-weight: 420;
+      letter-spacing: 0.01em;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .summary .empty-state {
+      color: #4f6789;
+      font-weight: 380;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+    }
+
+    .summary .plan-title {
+      color: #eef5ff;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      opacity: 0.8;
+      border-bottom: 1px solid #1f2d45;
+      padding-bottom: 0.3rem;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .summary .line {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .summary .label-sm {
+      color: #7a92b4;
+      min-width: 60px;
+      font-weight: 450;
+    }
+
+    .summary .value {
+      color: #e4ecfa;
+      font-weight: 440;
+    }
+
+    .summary .value.empty {
+      color: #4f6789;
+    }
+
+    /* extra polish */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, #1f2d45, transparent);
+      margin: 0.5rem 0 1.25rem 0;
+      opacity: 0.5;
+    }
+
+    @media (max-width: 500px) {
+      .card {
+        padding: 1.25rem;
+      }
+      .flex-row {
+        flex-direction: column;
+        gap: 0;
+      }
+      .flex-row .field-group {
+        min-width: unset;
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      header .badge-light {
+        align-self: flex-start;
+        margin-top: 0.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+
+  <header>
+    <div class="left">
+      <h1>
+        <span class="accent">⸻</span> trading checklist
+      </h1>
+      <span class="sub">structured · minimalist · dark</span>
+    </div>
+    <span class="badge-light">v1.0</span>
+  </header>
+
+  <!-- row: direction + pd array -->
+  <div class="flex-row">
+    <div class="field-group">
+      <label><span class="label-icon">↗</span> where</label>
+      <select id="tradeDirection">
+        <option value="">select</option>
+        <option value="IRL → ERL">IRL → ERL</option>
+        <option value="ERL → IRL">ERL → IRL</option>
+      </select>
+    </div>
+
+    <div class="field-group">
+      <label><span class="label-icon">▦</span> pd array</label>
+      <select id="pdArray">
+        <option value="">select</option>
+        <option value="FVG">FVG</option>
+        <option value="OB">OB</option>
+        <option value="IFVG">IFVG</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- row: pd zone + entry -->
+  <div class="flex-row">
+    <div class="field-group">
+      <label><span class="label-icon">◈</span> p/d zone</label>
+      <select id="pdZone">
+        <option value="">select</option>
+        <option value="Premium">Premium</option>
+        <option value="Discount">Discount</option>
+      </select>
+    </div>
+
+    <div class="field-group">
+      <label><span class="label-icon">▶</span> entry</label>
+      <select id="entry">
+        <option value="">select</option>
+        <option value="OB">OB</option>
+        <option value="FVG">FVG</option>
+        <option value="OTE">OTE</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- row: exit + risk -->
+  <div class="flex-row">
+    <div class="field-group">
+      <label><span class="label-icon">■</span> exit</label>
+      <select id="exit">
+        <option value="">select</option>
+        <option value="SSL Liquidity">SSL Liquidity</option>
+        <option value="BSL Liquidity">BSL Liquidity</option>
+      </select>
+    </div>
+
+    <div class="field-group">
+      <label><span class="label-icon">⚡</span> risk</label>
+      <select id="risk">
+        <option value="">select</option>
+        <option value="0.25%">0.25%</option>
+        <option value="0.5%">0.5%</option>
+        <option value="1%">1%</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- summary -->
+  <div class="summary" id="summaryBox">
+    <span class="empty-state">fill all fields · plan appears here</span>
+  </div>
+
+</div>
+
+<script>
+  (function() {
+    const tradeDirection = document.getElementById('tradeDirection');
+    const pdArray = document.getElementById('pdArray');
+    const pdZone = document.getElementById('pdZone');
+    const entry = document.getElementById('entry');
+    const exit = document.getElementById('exit');
+    const risk = document.getElementById('risk');
+    const summaryBox = document.getElementById('summaryBox');
+
+    function getValues() {
+      return {
+        tradeDirection: tradeDirection.value,
+        pdArray: pdArray.value,
+        pdZone: pdZone.value,
+        entry: entry.value,
+        exit: exit.value,
+        risk: risk.value
+      };
+    }
+
+    function updateSummary() {
+      const v = getValues();
+
+      const allEmpty = !v.tradeDirection && !v.pdArray && !v.pdZone && !v.entry && !v.exit && !v.risk;
+      if (allEmpty) {
+        summaryBox.innerHTML = `<span class="empty-state">fill all fields · plan appears here</span>`;
+        return;
+      }
+
+      // styled summary with subtle structure
+      const lines = [
+        `<span class="plan-title">⸻ trade plan</span>`,
+        `<span class="line"><span class="label-sm">where</span> <span class="value">${v.tradeDirection || '—'}</span></span>`,
+        `<span class="line"><span class="label-sm">setup</span> <span class="value">${v.pdArray || '—'} ${v.pdZone ? '· ' + v.pdZone : ''}</span></span>`,
+        `<span class="line"><span class="label-sm">entry</span> <span class="value">${v.entry || '—'}</span></span>`,
+        `<span class="line"><span class="label-sm">exit</span> <span class="value">${v.exit || '—'}</span></span>`,
+        `<span class="line"><span class="label-sm">risk</span> <span class="value">${v.risk || '—'}</span></span>`
+      ];
+
+      summaryBox.innerHTML = lines.join('');
+    }
+
+    const selects = [tradeDirection, pdArray, pdZone, entry, exit, risk];
+    selects.forEach(sel => {
+      sel.addEventListener('change', updateSummary);
+    });
+
+    updateSummary();
+  })();
+</script>
+
+</body>
+</html>
